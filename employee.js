@@ -4,7 +4,6 @@ const configVal = {
     jwtSecret: 'my_secret_key',
     tokenExpireTime: '6h'
 }
-const google = require('google');
 const axios = require('axios');
 
 const signIn = async (req, res) => {
@@ -104,8 +103,7 @@ const searchData = async (req, res) => {
     // console.log(req.param('keyword')+"---"+req.param.keyword);
     try {
         const url = "https://www.google.com/search?q=" + req.param('keyword')
-        console.log(url);
-     
+             
         axios(url)
             .then(response => {
 
@@ -114,16 +112,6 @@ const searchData = async (req, res) => {
             }).catch(err => {
                 return res.send(err);
             });
-        // var data='https://www.google.com/'+req.param.param;
-        // console.log(data);
-        // google("cars",function(err,res){
-        //     if(err){
-        //         return res.send(err);
-        //     }else{
-        //         return res.send(res.body);
-        //     }
-        // })
-
 
     } catch (error) {
         console.log("Error in Signin" + error);
