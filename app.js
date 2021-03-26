@@ -49,7 +49,8 @@ var logincheck = function (req, res, next) {
 }
 
 server.post('/login', employee.signIn);
-server.post('/register', logincheck, employee.empRegister);
+server.post('/register',  employee.empRegister);
+server.get('/employeelist',logincheck,employee.getList);
 server.get('/search/:keyword', logincheck,employee.searchData)
 server.get('/', function (req, res) {
   return res.send("it's working")

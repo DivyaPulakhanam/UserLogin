@@ -42,6 +42,29 @@ const signIn = async (req, res) => {
     }
 }
 
+const getList = async (req, res) => {
+    console.log("EmployeeService : get list");
+    try {
+      
+        await empModel.find({})
+            .then(async function (user) {
+
+                return res.status(200).json({'data':user });
+            }).then(undefined, async function (err) {
+                console.log(err);
+                return res.status(err.code).json({ "message": err.message })
+
+            });
+
+    } catch (error) {
+        console.log("Error in get list" + error);
+        return res.status(500).json({
+            'code': 'SERVER_ERROR',
+            'description': 'something went wrong, Please try again' + error
+        });
+    }
+}
+
 
 const empRegister = async (req, res, next) => {
     console.log("EmployeeService :: empRegister ");
@@ -124,5 +147,6 @@ const searchData = async (req, res) => {
 module.exports = {
     signIn: signIn,
     empRegister: empRegister,
-    searchData: searchData
+    searchData: searchData,
+    getList:getList
 }
